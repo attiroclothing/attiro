@@ -301,8 +301,8 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="newsletter-form">
-                                <form action="#">
-                                    <input type="email" placeholder="Enter your email address">
+                                <form name="submit-to-google-sheet">
+                                    <input type="email" name="Email" placeholder="Enter your email address" required>
                                     <button type="submit" class="btn">Subscribe <span></span></button>
                                 </form>
                             </div>
@@ -413,6 +413,20 @@
 
 
         <!-- JS here -->
+
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzs07mJWop10MHtHpRnrJzat4FOt7d9-5ioDwQaMk0nruGJsfATLfPqAcMYlWFrZ-IR/exec'
+            const form = document.forms['submit-to-google-sheet']
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message))
+            })
+        </script>
+
+
         <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/isotope.pkgd.min.js"></script>
